@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VuiHoc.online - Nền Tảng Học Tập Tương Tác</title>
+    <!-- Link font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Link file CSS -->
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <!-- Thanh điều hướng đầu trang -->
+    <header class="header">
+      <div class="header__logo">
+        <img src="/src/logo.svg" alt="logo" class="header__logo-img" />
+      </div>
+      <!-- Menu desktop -->
+      <nav class="header__nav desktop-only">
+        <ul class="header__nav-list">
+          <li class="header__nav-item">
+            <a class="header__nav-link" href="#">Khóa Học</a>
+          </li>
+          <li class="header__nav-item">
+            <a class="header__nav-link" href="#">Lộ Trình</a>
+          </li>
+          <li class="header__nav-item">
+            <a class="header__nav-link" href="#">Bảng Điều Khiển</a>
+          </li>
+        </ul>
+      </nav>
+      <!-- Menu mobile -->
+      <button class="header__burger-btn mobile-only" aria-label="Mở menu">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+        >
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <dialog class="mobile-menu" id="mobileDialog">
+        <div class="mobile-menu__wrapper">
+          <button class="mobile-menu__close-btn" aria-label="Đóng menu">
+            ✕
+          </button>
+          <nav class="mobile-menu__nav">
+            <ul class="mobile-menu__list">
+              <li style="--i: 1">
+                <a class="mobile-menu__link is-active" href="#">Khóa Học</a>
+              </li>
+              <li style="--i: 2">
+                <a class="mobile-menu__link" href="#">Lộ Trình</a>
+              </li>
+              <li style="--i: 3">
+                <a class="mobile-menu__link" href="#">Bảng Điều Khiển</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </dialog>
+    </header>
+
+    <!-- Nội dung chính của Web App -->
+    <main>
+      <!-- Phần hiển thị Tiến độ tổng quan -->
+      <section class="progress">
+        <h2 class="progress__title">Tiến độ học tập của bạn</h2>
+        <progress class="progress__bar" value="40" max="100"></progress>
+        <span class="progress__percent">40%</span>
+      </section>
+
+      <!-- Danh sách khóa học -->
+      <section class="courses">
+        <h2 class="courses__title">Khóa học nổi bật</h2>
+
+        <!-- Khóa học 1 -->
+        <article class="courses__card">
+          <img
+            class="courses__card-img"
+            src="/src/img/course-01.png"
+            alt="Khóa học JavaScript"
+          />
+          <h3 class="courses__card-title">JavaScript Thực Chiến 2026</h3>
+          <p class="courses__card-desc">
+            Làm chủ JS thuần thông qua việc xây dựng ứng dụng thực tế.
+          </p>
+          <button class="courses__card-btn">Vào học ngay</button>
+        </article>
+
+        <!-- Khóa học 2 -->
+        <article class="courses__card">
+          <img
+            class="courses__card-img"
+            src="/src/img/course-02.png"
+            alt="Khóa học HTML CSS"
+          />
+          <h3 class="courses__card-title">HTML5 & CSS3 Masterclass</h3>
+          <p class="courses__card-desc">
+            Xây dựng giao diện Web chuẩn SEO, thích ứng mọi màn hình.
+          </p>
+          <button class="courses__card-btn">Vào học ngay</button>
+        </article>
+        <!-- Khóa học 3 -->
+        <article class="courses__card">
+          <img
+            class="courses__card-img"
+            src="/src/img/course-03.png"
+            alt="Khóa học HTML CSS"
+          />
+          <h3 class="courses__card-title">ExpressJS & MongoDB</h3>
+          <p class="courses__card-desc">
+            Xây dựng logic backend cơ bản với ExpressJS & MongoDB.
+          </p>
+          <button class="courses__card-btn">Vào học ngay</button>
+        </article>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p class="footer__copyright">
+        &copy; 2026 VuiHoc.online. Phát triển bởi Lập Trình Viên Gà mờ
+      </p>
+    </footer>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/app.js" type="module"></script>
+  </body>
+</html>

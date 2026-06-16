@@ -1,0 +1,433 @@
+/* ==========================================================================
+   1. ĐỊNH NGHĨA BIẾN (CSS VARIABLES) & RESET TỰ DO
+   ========================================================================== */
+:root {
+  --primary-color: #4f46e5;
+  --primary-hover: #4338ca;
+  --bg-app: #f8fafc;
+  --bg-card: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --progress-color: #10b981;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-size: 1.6rem;
+  line-height: 1.5;
+  font-family: "Be Vietnam Pro", sans-serif;
+  color: var(--text-main);
+  background-color: var(--bg-app);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+}
+li {
+  list-style: none;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+input,
+textarea {
+  outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* ==========================================================================
+   2. KHỐI HEADER (Thanh điều hướng Flexbox)
+   ========================================================================== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5%;
+  background-color: var(--bg-card);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+  transition: var(--transition-smooth);
+}
+
+.header__logo {
+  height: 4rem;
+}
+.header__logo-img {
+  height: 100%;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+.header__logo-img:hover {
+  filter: drop-shadow(2px 3px 5px var(--primary-color));
+}
+
+.header__nav-list {
+  display: flex;
+  gap: 2rem;
+}
+
+.header__nav-link {
+  font-size: 1.4rem;
+  display: inline-block;
+  padding: 0.5rem 0;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 500;
+  transition: var(--transition-smooth);
+}
+
+.header__nav-link:hover {
+  color: var(--primary-color);
+}
+
+main {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 6rem;
+}
+
+/* ==========================================================================
+   3. KHỐI PROGRESS (Tiến độ học tập)
+   ========================================================================== */
+.progress {
+  width: 100%;
+  margin: 2rem auto;
+  padding: 0 5%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.progress__title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.progress__bar {
+  flex: 1;
+  height: 12px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.progress__bar::-webkit-progress-bar {
+  background-color: #e2e8f0;
+  border-radius: var(--radius-md);
+}
+.progress__bar::-webkit-progress-value {
+  background-color: var(--progress-color);
+  border-radius: var(--radius-md);
+}
+.progress__percent {
+  font-weight: 700;
+  color: var(--progress-color);
+}
+
+/* ==========================================================================
+   4. KHỐI COURSES (Hệ thống lưới CSS Grid nâng cao)
+   ========================================================================== */
+.courses {
+  width: 100%;
+  margin: 3rem auto;
+  padding: 0 5%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.courses__title {
+  grid-column: 1 / -1;
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.courses__card {
+  background-color: var(--bg-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition-smooth);
+}
+
+.courses__card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.courses__card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.courses__card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+}
+.courses__card-desc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  padding: 0 1.5rem 1.5rem 1.5rem;
+  flex-grow: 1;
+}
+
+.courses__card-btn {
+  margin: 0 1.5rem 1.5rem 1.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.8rem;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: 600;
+  transition: var(--transition-smooth);
+}
+
+.courses__card-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+/* ==========================================================================
+   ẨN/HIỆN PHÂN TÁCH THIẾT BỊ & BURGER
+   ========================================================================== */
+.mobile-only {
+  display: none;
+}
+.desktop-only {
+  display: block;
+}
+
+.header__burger-btn {
+  background: transparent;
+  color: var(--text-main);
+  font-size: 1.5rem;
+  padding: 0.5rem;
+}
+
+/* ==========================================================================
+   CSS DIALOG MOBILE - PHIÊN BẢN CHUẨN HÓA 2026
+   ========================================================================== */
+.mobile-menu {
+  border: none;
+  padding: 0;
+  width: 75vw;
+  height: 100vh;
+  max-height: 100vh;
+  margin-left: auto;
+  background: var(--bg-card);
+  transform: translateX(100%);
+  transition:
+    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    display 0.4s allow-discrete,
+    overlay 0.4s allow-discrete;
+}
+
+.mobile-menu[open] {
+  transform: translateX(0);
+}
+
+@starting-style {
+  .mobile-menu[open] {
+    transform: translateX(100%);
+  }
+}
+
+/* BACKDROP CHỐNG GIẬT */
+.mobile-menu::backdrop {
+  background: rgba(15, 23, 42, 0);
+  backdrop-filter: blur(0px);
+  transition:
+    background-color 0.4s ease,
+    backdrop-filter 0.4s ease,
+    display 0.4s allow-discrete,
+    overlay 0.4s allow-discrete;
+}
+
+.mobile-menu[open]::backdrop {
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+@starting-style {
+  .mobile-menu[open]::backdrop {
+    background: rgba(15, 23, 42, 0);
+    backdrop-filter: blur(0px);
+  }
+}
+
+/* Cấu trúc bên trong Menu Mobile */
+.mobile-menu__wrapper {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.mobile-menu__wrapper .mobile-menu__close-btn {
+  align-self: flex-end;
+  background: transparent;
+  font-size: 1.8rem;
+  color: var(--text-muted);
+}
+
+.mobile-menu__wrapper .mobile-menu__list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.mobile-menu__wrapper .mobile-menu__link {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* 👑 CẤU HÌNH SO LE (GỐC): Tối ưu lại thời gian trễ từ 0.3s xuống 0.08s cho mượt mắt */
+.mobile-menu__list li {
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    display 0.5s;
+  transition-behavior: allow-discrete;
+  transition-delay: calc(var(--i) * 0.08s);
+}
+
+/* ==========================================================================
+   5. KHỐI FOOTER
+   ========================================================================== */
+.footer {
+  text-align: center;
+  padding: 3rem 0;
+  margin-top: 5rem;
+  background-color: var(--bg-card);
+  border-top: 1px solid #e2e8f0;
+}
+.footer__copyright {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   BỘ LỌC RESPONSIVE (MEDIA QUERY)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .mobile-only {
+    display: block;
+  }
+  .desktop-only {
+    display: none;
+  }
+
+  /* TỐI ƯU HÓA HOẠT HỌA VÀ STYLE TRÊN MOBILE */
+  .mobile-menu {
+    background: linear-gradient(
+      to left,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.8)
+    );
+    border-left: 0.2rem solid var(--primary-color);
+    backdrop-filter: blur(12px);
+
+    /* Sửa lại Nesting chuẩn cho nút close */
+    & .mobile-menu__close-btn {
+      background: transparent;
+      font-size: 1.8rem;
+      color: var(--text-main);
+      font-weight: bolder;
+      &:hover {
+        color: var(--primary-color);
+      }
+    }
+
+    /* Sửa lại Nesting chuẩn cho các thanh link */
+    & .mobile-menu__link {
+      display: block;
+      height: 100%;
+      font-size: 1.8rem;
+      color: var(--text-main);
+      font-weight: bolder;
+      text-transform: uppercase;
+      width: 100%;
+      border-radius: var(--radius-md);
+      border: 1px solid #e2e8f0;
+      padding: 1rem 2rem;
+      transition: var(--transition-smooth); /* Thêm mượt cho hiệu ứng hover */
+
+      &:hover,
+      &.is-active {
+        background-color: var(--bg-card);
+        color: var(--primary-color);
+      }
+    }
+
+    /* Sửa lại Nesting cho phần wrapper kính cong */
+    & .mobile-menu__wrapper {
+      margin: 2rem 2rem;
+      height: calc(100% - 4rem);
+      padding: 2rem 2rem;
+      box-shadow: 0 1px 10px 0 rgba(255, 255, 255, 0.5); /* Chỉnh lại một chút độ mờ cho shadow tinh tế */
+      border-radius: var(--radius-lg);
+    }
+  }
+
+  /* Kích hoạt tọa độ so le khi đóng/mở trên Mobile */
+  .mobile-menu__list li {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  .mobile-menu[open] .mobile-menu__list li {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  @starting-style {
+    .mobile-menu[open] .mobile-menu__list li {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+  }
+}
