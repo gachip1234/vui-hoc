@@ -42,21 +42,94 @@ dialogMenu.addEventListener("click", (event) => {
 });
 
 // ==========================================================================
-// 4. BỘ GIÁM SÁT KÍCH THƯỚC (RESIZE OBSERVER) - PHIÊN BẢN SIÊU NHẸ TIẾT KIỆM PIN
+// 4. BỘ GIÁM SÁT KÍCH THƯỚC (RESIZE OBSERVER) - BẢN FIX KẸT LỚP MỜ BACKDROP
 // ==========================================================================
 const layoutObserver = new ResizeObserver((entries) => {
   for (let entry of entries) {
-    // Lấy chiều rộng vùng nhìn thấy của trình duyệt (Viewport Width)
     const currentWidth = entry.contentRect.width;
 
-    // Nếu màn hình phình to ra Desktop và menu dọc vẫn đang mở thì mới đóng
     if (currentWidth >= 768 && dialogMenu.hasAttribute("open")) {
-      setTimeout(() => {
+      // 👑 Sử dụng requestAnimationFrame để đồng bộ nhịp thở của JS với tốc độ dựng hình của CSS
+      requestAnimationFrame(() => {
         closeNavbar();
-      }, 0);
+      });
+      console.log(
+        "🛡️ Đã dọn sạch Dialog và Backdrop để trả lại giao diện Desktop!",
+      );
     }
   }
 });
 
-// Tối ưu: Quan sát thẻ HTML (documentElement) thay vì thẻ body để tránh bị kích hoạt oan khi cuộn trang
 layoutObserver.observe(document.documentElement);
+
+// ==========================================================================
+// 5. TÍNH NĂNG LIVE SEARCH FILTER (BẢN TOÀN DIỆN CÓ THÔNG BÁO)
+// ==========================================================================
+const searchInput = document.getElementById("searchCourse");
+const courseCards = document.querySelectorAll(".courses__card");
+const noResultMsg = document.getElementById("noResult"); // Tóm thằng thông báo ẩn
+
+searchInput.addEventListener("input", (event) => {
+  const keyword = event.target.value.trim().toLowerCase();
+
+  // 👑 Biến đếm số lượng khóa học tìm thấy
+  let countVisible = 0;
+
+  courseCards.forEach((card) => {
+    const cardAllText = card.textContent.toLowerCase();
+
+    if (cardAllText.includes(keyword)) {
+      card.style.display = "flex";
+      countVisible++; // Thấy một ông khớp thì tăng biến đếm lên 1
+    } else {
+      card.style.display = "none";
+    }
+  });
+
+  // 👑 Kiểm tra: Nếu biến đếm bằng 0 thì hiện thông báo lỗi, ngược lại thì ẩn đi
+  if (countVisible === 0) {
+    noResultMsg.style.display = "block";
+  } else {
+    noResultMsg.style.display = "none";
+  }
+});
+
+// ==========================================================================
+// 6. TÍNH NĂNG THÊM KHÓA HỌC MỚI (DYNAMIC ADD COMPONENT)
+// ==========================================================================
+
+// 1. Tóm các phần tử Form và vùng chứa danh sách khóa học
+const addForm = document.getElementById("addCourseForm");
+const coursesContainer = document.querySelector(".courses"); // Thẻ cha bọc các card
+
+addForm.addEventListener("submit", (event) => {
+  // 👑 Quan trọng: Chặn trình duyệt reload lại trang
+  event.preventDefault();
+
+  // 2. Lấy giá trị từ các ô nhập liệu
+  const titleValue = document.getElementById("newCourseTitle").value.trim();
+  const descValue = document.getElementById("newCourseDesc").value.trim();
+
+  // 3. Dựng khung xương HTML cho card mới (Dùng ảnh mặc định tạm thời)
+  const newCardHTML = `
+    <article class="courses__card">
+      <img
+        class="courses__card-img"
+        src="./src/img/course-01.png"
+        alt="${titleValue}"
+      />
+      <h3 class="courses__card-title">${titleValue}</h3>
+      <p class="courses__card-desc">${descValue}</p>
+      <button class="courses__card-btn">Vào học ngay</button>
+    </article>
+  `;
+
+  // 4. Bắn cái card mới này vào ĐẦU danh sách khóa học (ngay dưới chữ Khóa học nổi bật)
+  // 'afterbegin' có nghĩa là chèn vào vị trí đầu tiên bên trong container
+  coursesContainer.insertAdjacentHTML("afterbegin", newCardHTML);
+
+  // 5. Xóa sạch chữ trong form sau khi thêm thành công
+  addForm.reset();
+
+  console.log(`🎉 Đã thêm thành công khóa học mới: ${titleValue}`);
+});
